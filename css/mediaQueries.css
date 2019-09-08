@@ -1,0 +1,9 @@
+@media (max-width: 650px) {
+    .fileButtons {
+        width: 125px;
+        height: 125px;
+    }
+    .bttDesc {
+        font-size: 0.8rem;
+    }
+}

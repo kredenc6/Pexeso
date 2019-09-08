@@ -1,0 +1,425 @@
+/*orange color: #e99a33*/
+/*grey color: #2b2b2b*/
+
+/* ******************************* */
+/* ******** GENERAL STUFF ******** */
+/* ******************************* */
+
+#h2Settings,
+legend {
+    cursor: default;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.standartButton {
+  	margin: 20px auto;
+    width: 150px;
+    height: 38px;
+    border-radius: 20px;
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+button:hover,
+.box:hover {
+    cursor: pointer;
+}
+
+.hidden {
+	visibility: hidden;
+}
+
+/* ************************ */
+/* ******** HEADER ******** */
+/* ************************ */
+
+#header {
+  	display: none;
+    position: fixed;
+    top: -100px;
+    width: 100%;
+    height: 100px;
+    max-height: 100px;
+    z-index: 1;
+    
+    color: #eee;
+    background-color: rgba(43, 43, 43, 0.3);
+    transition: all 1s; 
+}
+
+.scoreLine p {
+    display: inline;
+    font-size: 3.5rem;
+}
+
+#setScore {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-content: center;
+}
+
+.scoreLine {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-content: center;
+    
+    margin-top: 1rem;
+    font-size: 2rem;
+}
+
+#setScore {}
+
+
+#arrDownContainer {
+    text-align: center;
+}
+
+#arrowDown,
+#arrowUp {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    color: #e99a33;
+    transition: all 0.3s;
+}
+
+#arrowDown:hover,
+#arrowUp:hover {
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: orange;
+}
+
+#arrowUp {
+    display: none;
+}
+
+/* ************************** */
+/* ******** PLAYAREA ******** */
+/* ************************** */
+
+#playarea {
+    display: none;
+    margin: 0 auto;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+    width: 100vw;
+    height: 100vh;
+	background-position: center;
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+.box {
+    width: auto;
+    height: auto;
+    margin: 5px;
+    font-size: 1.2rem;
+    transform-style: preserve-3d;
+    transition: all 0.65s ease;
+}
+
+.front,
+.back {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.front {
+    color: white;
+    background-color: black;
+    text-align: center;
+    letter-spacing: 4px;
+}
+
+.back {
+    background-size: contain;
+    background-position: center;
+    background-color: white;
+    transform: rotateY(180deg);
+    cursor: default;
+}
+
+.cardVideo {
+    width: inherit;
+    height: inherit;
+}
+
+#gameoverButt {
+  	margin: 10px auto;
+  	background-color: green;
+    display: none;
+}
+
+/* ************************* */
+/* ******** SETTINGS ******* */
+/* ************************* */
+
+#settingsHolder {
+	min-height: 100vh;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    background-color: #2b2b2b;
+}
+
+#settings {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+#settings input {
+    color: #000;
+}
+
+#h2Settings {
+    width: 100wv;
+    padding-top: 1rem;
+    font-size: 3rem;
+    text-align: center;
+    background-color: inherit;
+}
+
+#icon-sett {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-right: 1rem;
+    margin-bottom: -0.2rem;
+    color: #e99a33;
+}
+
+#fileProgress {
+	margin-top: 20px;
+}
+
+#countBarHolder {
+	width: 50%;
+	height: 3px;
+	margin: 0 auto;
+	border: 1px dotted black;
+}
+
+#countBar {
+	width: 0%;
+	height: 100%;
+	background-color: lawngreen;
+	transition: all 0.5s;
+}
+
+#fileCount {
+	text-align: center;
+	font-size: 0.8rem;
+	cursor: default;
+}
+
+/* ******** player ******* */
+
+#playerSettings {
+    width: 49.5%;
+    margin-top: 5vh;
+}
+
+#pCountHolder {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+#playerCount {
+    padding-left: 1.5rem;
+    font-size: 3rem;
+    cursor: default;
+}
+
+#plus_Minus {
+    padding-right: 1.5rem;
+    font-size: .6rem;
+}
+
+#plus_Minus button {
+    width: 100%;
+    padding: .2rem 0 .2rem 0;
+}
+
+#plus_Minus button:hover {
+    transition: all .2s;
+}
+
+#addPlayerButt:hover {
+    color: darkgreen;
+}
+
+#removePlayerButt {
+    margin-top: .2rem;
+}
+
+#removePlayerButt:hover {
+    color: darkred;
+}
+
+#playerArea {
+    width: 320px;
+    height: 320px;
+    margin: 0 auto;
+    border-radius: 20px;
+}
+
+.pColor {
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    vertical-align: bottom;
+    margin: 0 1rem 0 1rem;
+    transition: all .3s;
+}
+
+.pColor:hover {
+    cursor: pointer;
+    background-color: #000;
+    box-shadow: 2px 2px 6px orange, -2px -2px 6px orange;
+}
+
+legend {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.player,
+game {
+    margin: 1rem 0 1rem 5rem;
+}
+
+.player span {
+    font-size: 1.2rem;
+}
+
+/* ******** colorSelector ******* */
+
+#cSelector {
+    height: 1.5rem;
+    margin: .5rem 0 0 1rem;
+}
+
+.selectorColor {
+    display: inline-block;
+    width: 1.5rem;
+    height: 100%;
+    border-radius: 50%;
+    transition: all .3s;
+}
+
+.selectorColor:hover {
+    cursor: pointer;
+    box-shadow: 2px 2px 6px orange, -2px -2px 6px orange;
+}
+
+#colorPalette {
+    width: 100%;
+    height: 100%;
+    transition: color 2s;
+}
+
+/* ******** game ******* */
+
+#p1 input,
+#p2 input,
+#p3 input,
+#p4 input {
+    color: white;
+    background-color: #2b2b2b;
+    font-size: 1.2rem;
+}
+
+#p1 span:hover,
+#p2 span:hover,
+#p3 span:hover,
+#p4 span:hover {
+    text-shadow: white 1px 0 5px;
+}
+
+/* ******** file input, file buttons and start button ******* */
+
+input[type="file"] {
+    display: none;
+}
+
+#fileBttHolder {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+}
+
+.fileButtons {
+    width: 150px;
+    height: 150px;
+    margin: 2rem auto 0 auto;
+    padding: 1rem .5rem;
+    color: red;
+    text-align: center;
+    border: 1px solid red;
+    border-radius: 20px;
+    transition: all .3s;
+}
+
+.fileButtons:hover {
+    box-shadow: 2px 2px 6px orange, -2px -2px 6px orange;
+    cursor: pointer;
+}
+
+.fileCount {
+    font-size: 1.5rem;
+}
+
+.fileIconHolders {
+    margin: 0 auto;
+    margin-top: 15%;
+    text-align: center;
+    width: 40%;
+    height: 40%;
+    transition: all .3s ease-out;
+}
+
+.fileIconHolders svg {
+    width: 100%;
+    height: 100%;
+}
+
+#startButt {
+    color: #2b2b2b;
+    background-color: green;
+    transition: all 0.5s;
+}
+
+#startButt:hover {
+    box-shadow: 2px 2px 6px orange, -2px -2px 6px orange;
+    color: orange;
+}
+
+#startButt.inactiveStartButt {
+    color: darkred;
+	background-color: #2b2b2b;
+	cursor: default;
+}
+
+#startButt.inactiveStartButt:hover {
+    box-shadow: none;
+}
+/*
+testing and prototypes
+*/
