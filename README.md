@@ -1,3 +1,5 @@
+#PEXESO
+
 I've created this game to learn and practice vanilla javascript, css and htlm.
 
 So the code is messy, but the game works (in chrome at least).
