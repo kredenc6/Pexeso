@@ -27,3 +27,18 @@ export function getHeaderHeight() {
     let headerHeight = Math.min(/\d+/.exec(headerNode.style.height), /\d+/.exec(headerMaxHeight));
     return headerHeight;
 }
+
+export function hexToRGB(hex, alpha) {
+	if(hex.length == 4) {
+		hex = "#" + hex.slice(1).repeat(2);
+	}
+    let r = parseInt(hex.slice(1, 3), 16),
+        g = parseInt(hex.slice(3, 5), 16),
+        b = parseInt(hex.slice(5, 7), 16);
+
+    if (alpha) {
+		return `rgba( ${r}, ${g}, ${b}, ${alpha} )`;
+    } else {
+        return `rgba( ${r}, ${g}, ${b}, 1 )`;
+    }
+}
