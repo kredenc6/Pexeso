@@ -36,7 +36,7 @@ let gameData = {
     timer: 0
 };
 
-import {ColorSelector, createCSelector, removeCSelector, redrawCSelector, isInactiveColor, getInactiveColor} from "./colorSelector.js";
+import {createCSelector, removeCSelector, redrawCSelector, isInactiveColor, getInactiveColor} from "./colorSelector.js";
 import {getHeaderHeight, hexToRGB} from "./miscellaneous.js";
 import {filesIn} from "./fileSetup.js";
 import {changeName, isValidName} from "./nameChanger.js";
@@ -91,7 +91,7 @@ addPlayer(true);
 
 //SETTINGS, EVENT LISTENERS
 startButton.addEventListener("click", start);
-document.getElementById("gameoverButt").addEventListener("click", start);
+document.getElementById("gameoverBtt").addEventListener("click", start);
 document.getElementById("addPlayerButt").addEventListener("click", () => addPlayer());
 document.getElementById("removePlayerButt").addEventListener("click", removePlayer);
 
@@ -104,6 +104,7 @@ export function start() {
     playarea.style.display = "flex";
     document.getElementById("settingsHolder").style.display = "none";
     document.getElementById("header").style.display = "block";
+    document.querySelector("body").style.backgroundColor = "#fff";
     
   	reset();
     
@@ -386,15 +387,31 @@ function scoreUp() {
 
 function finnish() {
     let {players} = state;
-    let gameOverButt = document.getElementById("gameoverButt");
+    const finnishHolderNode = document.getElementById("finnishHolder");
+    const finnishMessageNode = document.getElementById("finnishMessage");
     let topScore = -1;
-    //finding top score
+    let winner = [];
+    //finding top score and winner(s)
     for (let x = 0; x < players.length; x++) {
+        if(players[x].score === topScore) {
+            winner.push(players[x].name);
+            break;
+        }
         if (players[x].score > topScore) {
             topScore = players[x].score;
+            winner = [players[x].name]
         }
     }
-    gameOverButt.style.display = "block";
+    if(winner.length === 1) {
+        finnishMessageNode.innerText = `${winner} is the winner with score: ${topScore}!`;
+    }
+    else {
+        let winners = "";
+        winner.forEach(w => winners = `${winners}${w}, `);
+        winners = winners.substring(0, winners.length-2);
+        finnishMessageNode.innerText = `${winners} are tied with score: ${topScore}.`;
+    }
+    finnishHolderNode.style.display = "block";
 }
 
 function reset(a) {
