@@ -7,11 +7,12 @@
 
 body {
     background-color: #2b2b2b;
+    cursor: default;
 }
 
 #h2Settings,
 legend {
-    cursor: default;
+    /* cursor: default; */
 }
 
 img {
@@ -83,13 +84,9 @@ button:hover,
     flex-flow: row nowrap;
     justify-content: space-around;
     align-content: center;
-    
     margin-top: 1rem;
     font-size: 2rem;
 }
-
-#setScore {}
-
 
 #arrDownContainer {
     text-align: center;
@@ -128,7 +125,6 @@ button:hover,
     width: 100vw;
     height: 100vh;
 	background-image: url("../img/white_background.png");
-/*	background-size: 100% 100%;*/
 	background-position: center;
 	background-repeat: no-repeat;
 	transition: all 1s;
@@ -176,22 +172,29 @@ button:hover,
     height: inherit;
 }
 
-#settingsHolder {
-    
-}
-
 #finnishHolder {
     display: none;
     width: 100vw;
     position: fixed;
-    top: 50vh;
-    background-color: rgb(0, 153, 255);
+    top: 48vh;
+    padding-top: .5rem;
+    font-size: 2rem;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    cursor: default;
+    z-index: 1;
 }
 
 #gameoverBtt,
 #mainMenuBtt {
   	margin: 10px auto;
-  	background-color: green;
+    transition: all .3s;
+    border: 1px solid #2b2b2b;
+}
+
+#gameoverBtt:hover,
+#mainMenuBtt:hover {
+    box-shadow: 2px 2px 6px orange, -2px -2px 6px orange;
 }
 
 /* ************************* */
@@ -218,7 +221,7 @@ button:hover,
 }
 
 #h2Settings {
-    width: 100wv;
+    width: 100vw;
     padding-top: 1rem;
     font-size: 3rem;
     text-align: center;
@@ -346,6 +349,7 @@ game {
 
 .player span {
     font-size: 1.2rem;
+    cursor: pointer;
 }
 
 /* ******** colorSelector ******* */

@@ -38,7 +38,7 @@ let gameData = {
 
 import {createCSelector, removeCSelector, redrawCSelector, isInactiveColor, getInactiveColor} from "./colorSelector.js";
 import {getHeaderHeight, hexToRGB} from "./miscellaneous.js";
-import {filesIn} from "./fileSetup.js";
+import {filesIn, styleFileCounter} from "./fileSetup.js";
 import {changeName, isValidName} from "./nameChanger.js";
 import {cardSizing, adjustDOMtoNextPlayer} from "./cardStyler.js";
 import {styleHeader} from "./headerStyler.js";
@@ -92,6 +92,7 @@ addPlayer(true);
 //SETTINGS, EVENT LISTENERS
 startButton.addEventListener("click", start);
 document.getElementById("gameoverBtt").addEventListener("click", start);
+document.getElementById("mainMenuBtt").addEventListener("click", backToSettings);
 document.getElementById("addPlayerButt").addEventListener("click", () => addPlayer());
 document.getElementById("removePlayerButt").addEventListener("click", removePlayer);
 
@@ -103,10 +104,11 @@ for(let input of fileTypeInputs) {
 export function start() {
     playarea.style.display = "flex";
     document.getElementById("settingsHolder").style.display = "none";
+    document.getElementById("finnishHolder").style.display = "none";
     document.getElementById("header").style.display = "block";
     document.querySelector("body").style.backgroundColor = "#fff";
     
-  	reset();
+  	resetPlayers();
     
     createCards();
     createDOM();
@@ -414,7 +416,7 @@ function finnish() {
     finnishHolderNode.style.display = "block";
 }
 
-function reset(a) {
+function resetPlayers() {
     let {players} = state;
     for (let x = 0; x < players.length; x++) {
         players[x].score = 0;
@@ -473,3 +475,41 @@ function smallerFileButton() {
 
 
 // ***** WORK IN PROGRESS *****
+
+function backToSettings() {
+    playarea.style.display = "none";
+    playarea.style.innerHTML = "";
+    document.getElementById("settingsHolder").style.display = "block";
+    document.getElementById("finnishHolder").style.display = "none";
+    document.getElementById("header").style.display = "none";
+    document.getElementById("startButt").style.display = "none";
+    document.querySelector("body").style.backgroundColor = "#2b2b2b";
+    
+    // RESET GAME STATE
+    state.cards = [];
+    state.deck = [];
+    state.files = {
+        audioURLs: [],
+        videoURLs: [],
+        pictureURLs: [],
+        fileNames: []
+    };
+    state.status = {
+        ...state.status,
+        pairCount: 0
+    };
+    
+    // STYLE BUTTONS AND RESET INPUTS
+    for(let button of document.getElementsByClassName("fileButtons")) {
+        button.style.color = "red";
+        button.style.border = "1px solid red";
+        button.querySelector("span").innerText = `Click to select ${button.querySelector("span").id.slice(0, -7)}.`;
+        // RESET INPUT FILES
+        button.querySelector("input").value = "";
+    }
+    // TODO "20" need to be state dependent on maxFiles
+    styleFileCounter(0, 20);
+    
+    window.removeEventListener("resize", cardSizing);
+    window.removeEventListener("resize", styleHeader);
+}
