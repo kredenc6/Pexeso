@@ -1,3 +1,10 @@
+@media (max-width: 1500px) {
+  #arrowDown,
+  #arrowUp {
+    opacity: 1;
+  }
+}
+
 @media (max-width: 650px) {
     .fileButtons {
         width: 125px;
@@ -8,17 +15,8 @@
     }
 }
 
-/*
-@media (min-aspect-ratio: 16/9) {
-  .fullscreen-bg__video {
-    height: 300%;
-    top: -100%;
+@media (orientation: portrait) and (max-aspect-ratio: 7/10) {
+  #orientationMessage {
+    display: flex;
   }
 }
-
-@media (max-aspect-ratio: 16/9) {
-  .fullscreen-bg__video {
-    width: 300%;
-    left: -100%;
-  }
-}*/

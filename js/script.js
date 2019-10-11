@@ -10,8 +10,9 @@ export const state = {
 	deck: [],
 	players: [],
 	cSelector: null,
-	playerCount: 2,
+    playerCount: 2,
 	files: {
+        maxFiles: 20,
 		pictureURLs: [],
 		audioURLs: [],
 		videoURLs: [],
@@ -133,7 +134,7 @@ function createPlayers(){
 function createCards() {
     if(state.cards.length > 0) return;
     for(let fileType in state.files) {
-		if(fileType == `fileNames`) {
+		if(!fileType.includes("URLs")) {
 			continue;
 		}
         for(let blob of state.files[fileType]) {
@@ -294,12 +295,13 @@ function showFace() {
 		// cards don't match    
         } else {
 			let {flipbackTime} = state;
-            let temp = this;
 			state.status.currentCard = this;
             state.status.ready = false;
             playarea.addEventListener("mousemove", mouseOnWhatCard);
 			if(flipbackTime === 0) {
-				window.ondblclick = flipback;
+                // window.ondblclick = flipback;
+                window.addEventListener("dblclick", flipback);
+                window.addEventListener("touchmove", flipback);
 			} else {
 				setTimeout(flipback, flipbackTime);
 			}
@@ -332,9 +334,10 @@ function showFace() {
     }
 	
 	function flipback() {
-		window.ondblclick = "";
-		let {previousCard, currentCard} = state.status;
+        window.removeEventListener("dblclick", flipback);
+        window.removeEventListener("touchmove", flipback);
 		playarea.removeEventListener("mousemove", mouseOnWhatCard);
+		let {previousCard, currentCard} = state.status;
 		nextPlayer();
 		flipbackDOM(previousCard, currentCard);
 		state.status.ready = true;
@@ -489,6 +492,7 @@ function backToSettings() {
     state.cards = [];
     state.deck = [];
     state.files = {
+        maxFiles: 20,
         audioURLs: [],
         videoURLs: [],
         pictureURLs: [],
@@ -507,8 +511,8 @@ function backToSettings() {
         // RESET INPUT FILES
         button.querySelector("input").value = "";
     }
-    // TODO "20" need to be state dependent on maxFiles
-    styleFileCounter(0, 20);
+
+    styleFileCounter(0, state.files.maxFiles);
     
     window.removeEventListener("resize", cardSizing);
     window.removeEventListener("resize", styleHeader);

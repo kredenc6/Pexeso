@@ -4,8 +4,8 @@ let startButton = document.getElementById("startButt");
 
 //  creating URLs for pictures/sounds/videos + some styling
 export function filesIn() {
-  let {pictureURLs, audioURLs, videoURLs, fileNames} = state.files;
-  let id = event.target.id;
+  let {maxFiles, pictureURLs, audioURLs, videoURLs, fileNames} = state.files;
+  const id = event.target.id;
   //chosenFiles refer! to the files object
   let chosenFiles;
   if(id.includes(`picture`)) chosenFiles = pictureURLs;
@@ -13,7 +13,6 @@ export function filesIn() {
   else if(id.includes(`video`)) chosenFiles = videoURLs;
   window.URL = window.URL || window.webkitURL || window.mozURL;
   let fileCount = pictureURLs.length + audioURLs.length + videoURLs.length;
-  let maxFiles = 20;
   
   for (let x = 0; x < event.target.files.length; x++) {
 	  	if(fileCount == maxFiles) {
