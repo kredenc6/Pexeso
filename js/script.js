@@ -352,7 +352,6 @@ function showFace() {
 	}
 }
 
-
 function findNextPlayer() {
     let {players} = state;
     for (let x = 0; x < players.length; x++) {

@@ -5,20 +5,90 @@
   }
 }
 
-@media (max-width: 650px) {
-    .fileButtons {
-        width: 125px;
-        height: 125px;
-    }
-    .bttDesc {
-        font-size: 0.8rem;
-    }
+@media (orientation: portrait) and (max-aspect-ratio: 7/10) {
+  .standartButton {
+  	margin: 50px auto;
+    min-width: 150px;
+    padding: 1.7rem;
+    border-radius: 40px;
+    font-size: 2.1rem;
+    font-weight: 800;
 }
 
-@media (orientation: portrait) and (max-aspect-ratio: 7/10) {
-  #orientationMessage {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
+  #h2Settings {
+    margin-top: 9vh;
+    font-size: 12vw;
+  }
+
+  #fileBttHolder {
+    margin: 5vh 0;
+    
+  }
+
+  .fileButtons {
+    width: 25vw;
+    max-width: 200px;
+    max-height: 200px;
+  }
+
+  .bttDesc {
+    font-size: 2.5vw;
+  }
+
+  .fileCount {
+    font-size: 4vw;
+  }
+
+  #countBarHolder {
+    width: 70%;
+  }
+
+  #fileCount {
+    margin-top: 10px;
+    font-size: 2.5vw;
+  }
+
+  #playerArea {
+    width: 100vw;
+    height: auto;
+  }
+
+  #playerArea legend {
+    margin-bottom: 3vh;
+    font-size: 8vw;
+  }
+
+  #playerCount {
+    font-size: 9vw;
+  }
+
+  #plus_Minus {
+    margin-bottom: 3vh;
+    font-size: 2vw;
+  }
+
+  .player {
+    margin-bottom: 3.5vh;
+  }
+
+  #players span,
+  #players input {
+    font-size: 7vw;
+  }
+
+  .pColor {
+    width: 6vw;
+    height: 6vw;
+  }
+
+  #cSelector {
+    min-width: 90%;
+    height: 6vw;
+    margin-left: 1rem;
+  }
+
+  .selectorColor {
+    width: 6vw;
+    height: 6vw;
   }
 }
