@@ -401,7 +401,6 @@ function finnish() {
     for (let x = 0; x < players.length; x++) {
         if(players[x].score === topScore) {
             winner.push(players[x].name);
-            break;
         }
         if (players[x].score > topScore) {
             topScore = players[x].score;
@@ -530,11 +529,9 @@ function setupFullscreen() {
     }
 }
 
-// document.getElementById("enterFS").addEventListener("click",enterFS);
-// document.getElementById("exitFS").addEventListener("click",exitFS);
-
 function enterFS() {
-    document.querySelector("body").requestFullscreen()
+    document.querySelector("body").requestFullscreen({navigationUI: "hide"})
+    // document.querySelector("body").requestFullscreen()
     .catch(err => console.log(err));
 }
 
@@ -552,8 +549,6 @@ document.addEventListener("fullscreenchange", () => {
         for(let exitIcon of document.getElementsByClassName("exitFS")) {
             exitIcon.style.display = "none";
         }
-        // document.getElementById("enterFS").style.display = "inline";
-        // document.getElementById("exitFS").style.display = "none";
     }
     else {
         for(let enterIcon of document.getElementsByClassName("enterFS")) {
@@ -562,8 +557,6 @@ document.addEventListener("fullscreenchange", () => {
         for(let exitIcon of document.getElementsByClassName("exitFS")) {
             exitIcon.style.display = "inline";
         }
-        // document.getElementById("enterFS").style.display = "none";
-        // document.getElementById("exitFS").style.display = "inline";
     }
     state.fullscreen = !state.fullscreen;
 });

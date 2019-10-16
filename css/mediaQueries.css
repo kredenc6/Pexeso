@@ -7,16 +7,12 @@
 
 @media (orientation: portrait) and (max-aspect-ratio: 7/10) {
   .standartButton {
-  	margin: 50px auto;
-    min-width: 150px;
-    padding: 1.7rem;
-    border-radius: 40px;
-    font-size: 2.1rem;
-    font-weight: 800;
+  	margin: 7vh auto;
+    font-size: 1.3rem;
 }
 
   #h2Settings {
-    margin-top: 9vh;
+    margin-top: 6vh;
     font-size: 12vw;
   }
 
@@ -59,12 +55,16 @@
     font-size: 8vw;
   }
 
+  #pCountHolder {
+    margin: 0 auto;
+  }
+
   #playerCount {
-    font-size: 10.5vw;
+    font-size: 12vw;
   }
 
   #plus_Minus {
-    margin-bottom: 3vh;
+    margin-top: 0.3rem;
     font-size: 2.5vw;
   }
 
