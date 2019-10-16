@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>PEXESO - memory game</title>
     <link rel="stylesheet" href="css/mcleod-resetPre.css">
-    <link rel="stylesheet" href="css/mainPre.css">
-    <link rel="stylesheet" href="css/mediaQueriesPre.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/mediaQueries.css">
 </head>
 
 <body>
@@ -53,6 +53,14 @@
         <symbol id="icon-arrow-up" viewbox="0 0 100 100">
             <polygon transform="matrix(-.29688 0 0 -.26042 126 116.67)" points="96 180.7 115.3 160 256 310.5 396.6 160 416 180.7 256 352"/>
         </symbol>
+
+        <symbol id="icon-expand" viewbox="0 0 100 100">
+            <path d="m84.832 84.833h-18.999v12.667h31.667v-31.667h-12.668zm0.0012-69.665v18.999h12.667v-31.667h-31.667v12.668zm-69.665-0.0012h18.999v-12.667h-31.667v31.667h12.668zm-0.0012 69.665v-18.999h-12.667v31.667h31.667v-12.668z"/>
+        </symbol>
+
+        <symbol id="icon-contract" viewbox="0 0 100 100">
+            <path d="m2.5 78.5h18.999v19h12.668v-31.667h-31.667zm18.999-57h-18.999v12.667h31.667v-31.667h-12.668zm44.335 76h12.667v-19h19v-12.667h-31.667zm12.667-76v-19h-12.667v31.667h31.667v-12.667z"/>
+        </symbol>
     </svg>
     <!--   HEADER -->
     <header id="header">
@@ -63,6 +71,14 @@
             </svg>
             <svg id="arrowUp">
                 <use xlink:href="#icon-arrow-up"></use>
+            </svg>
+        </div>
+        <div id="headerFSIconHolder">
+            <svg class="enterFS">
+                <use xlink:href="#icon-expand"></use>
+            </svg>
+            <svg class="exitFS">
+                <use xlink:href="#icon-contract"></use>
             </svg>
         </div>
     </header>
@@ -78,6 +94,14 @@
 
     <!--    SETTINGS -->
     <div id="settingsHolder">
+        <div id="settingsFSIconHolder">
+            <svg class="enterFS">
+                <use xlink:href="#icon-expand"></use>
+            </svg>
+            <svg class="exitFS">
+                <use xlink:href="#icon-contract"></use>
+            </svg>
+        </div>
         <h2 id="h2Settings">PEXESO</h2>
         <div id="fileBttHolder">
             <label class="fileButtons" for="pictureFiles">

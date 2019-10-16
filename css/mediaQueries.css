@@ -27,6 +27,7 @@
 
   .fileButtons {
     width: 25vw;
+    height: 25vw;
     max-width: 200px;
     max-height: 200px;
   }
@@ -59,12 +60,12 @@
   }
 
   #playerCount {
-    font-size: 9vw;
+    font-size: 10.5vw;
   }
 
   #plus_Minus {
     margin-bottom: 3vh;
-    font-size: 2vw;
+    font-size: 2.5vw;
   }
 
   .player {
@@ -73,7 +74,7 @@
 
   #players span,
   #players input {
-    font-size: 7vw;
+    font-size: 6vw;
   }
 
   .pColor {

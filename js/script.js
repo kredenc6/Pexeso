@@ -26,7 +26,8 @@ export const state = {
 		ready: true
 	},
 	mouseOnCard: null,
-	flipbackTime: 0
+    flipbackTime: 0,
+    fullscreen: false
 };
 
 let startButton = document.getElementById("startButt");
@@ -108,6 +109,7 @@ export function start() {
     document.getElementById("finnishHolder").style.display = "none";
     document.getElementById("header").style.display = "block";
     document.querySelector("body").style.backgroundColor = "#fff";
+    document.querySelector("html").style.backgroundColor = "#fff";
     
   	resetPlayers();
     
@@ -486,6 +488,7 @@ function backToSettings() {
     document.getElementById("header").style.display = "none";
     document.getElementById("startButt").style.display = "none";
     document.querySelector("body").style.backgroundColor = "#2b2b2b";
+    document.querySelector("html").style.backgroundColor = "#2b2b2b";
     
     // RESET GAME STATE
     state.cards = [];
@@ -516,3 +519,53 @@ function backToSettings() {
     window.removeEventListener("resize", cardSizing);
     window.removeEventListener("resize", styleHeader);
 }
+
+
+function setupFullscreen() {
+    for(let enterIcon of document.getElementsByClassName("enterFS")) {
+        enterIcon.addEventListener("click",enterFS);
+    }
+    for(let exitIcon of document.getElementsByClassName("exitFS")) {
+        exitIcon.addEventListener("click",exitFS);
+    }
+}
+
+// document.getElementById("enterFS").addEventListener("click",enterFS);
+// document.getElementById("exitFS").addEventListener("click",exitFS);
+
+function enterFS() {
+    document.querySelector("body").requestFullscreen()
+    .catch(err => console.log(err));
+}
+
+function exitFS() {
+    if(!document.fullscreenElement) return;
+    document.exitFullscreen()
+    .catch(err => console.log(err));
+}
+
+document.addEventListener("fullscreenchange", () => {
+    if(state.fullscreen) {
+        for(let enterIcon of document.getElementsByClassName("enterFS")) {
+            enterIcon.style.display = "inline";
+        }
+        for(let exitIcon of document.getElementsByClassName("exitFS")) {
+            exitIcon.style.display = "none";
+        }
+        // document.getElementById("enterFS").style.display = "inline";
+        // document.getElementById("exitFS").style.display = "none";
+    }
+    else {
+        for(let enterIcon of document.getElementsByClassName("enterFS")) {
+            enterIcon.style.display = "none";
+        }
+        for(let exitIcon of document.getElementsByClassName("exitFS")) {
+            exitIcon.style.display = "inline";
+        }
+        // document.getElementById("enterFS").style.display = "none";
+        // document.getElementById("exitFS").style.display = "inline";
+    }
+    state.fullscreen = !state.fullscreen;
+});
+
+setupFullscreen();
