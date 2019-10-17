@@ -92,7 +92,7 @@ button:hover,
 #scoreLine {
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex;
+  display: none;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-flow: row nowrap;
@@ -103,7 +103,25 @@ button:hover,
       align-content: center;
   margin-top: 1rem;
   font-size: 2rem;
+  /* font size adjusted in headerStyler.js */
 }
+
+#headerMenu {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#headerMenu button {
+  margin: 0 1vw;
+  border: 1px solid rgba(233, 154, 51, 0.5);
+  padding: 0.8vw 0;
+  border-radius: 20px;
+  font-weight: 800;
+}
+
+/* ******** arrows ******* */
 
 #arrowContainer {
   text-align: center;
@@ -112,8 +130,8 @@ button:hover,
 #arrowDown,
 #arrowUp {
   position: absolute;
-  top: 100%;
   left: 50%;
+  transform: translateX(-50%);
   color: #e99a33;
   font-size: 5vmin;
   opacity: 0.7;
@@ -125,14 +143,45 @@ button:hover,
 #arrowDown:hover,
 #arrowUp:hover {
   cursor: pointer;
-  font-size: 7vmin;
+  font-size: 6vmin;
   color: orange;
   opacity: 1;
+}
+
+#arrowDown {
+  top: 100%;
 }
 
 #arrowUp {
   display: none;
 }
+
+#multipleArrows {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+}
+
+#arrowLeft,
+#arrowRight {
+  display: none;
+  font-size: calc(.3rem + .8vw);
+  color: #e99a33;
+  opacity: 0.7;
+  z-index: 2;
+  transition: opacity .3s, color .3s, maring-right 1s, margin-left 1s;
+}
+
+#arrowLeft:hover,
+#arrowRight:hover {
+  color: orange;
+  opacity: 1;
+  cursor: pointer;
+}
+
 
 /* ************************** */
 /* ******** PLAYAREA ******** */
@@ -226,8 +275,8 @@ border: 1px solid rgba( 0, 0, 0, 0.1 );
   z-index: 1;
 }
 
-#gameoverBtt,
-#mainMenuBtt {
+.gameoverBtt,
+.mainMenuBtt {
   margin: 10px auto;
   -webkit-transition: all .3s;
   -o-transition: all .3s;
@@ -235,8 +284,8 @@ border: 1px solid rgba( 0, 0, 0, 0.1 );
   border: 1px solid #2b2b2b;
 }
 
-#gameoverBtt:hover,
-#mainMenuBtt:hover {
+.gameoverBtt:hover,
+.mainMenuBtt:hover {
   -webkit-box-shadow: 2px 2px 6px orange, -2px -2px 6px orange;
           box-shadow: 2px 2px 6px orange, -2px -2px 6px orange;
 }
@@ -266,8 +315,8 @@ min-height: 100vh;
   top: 1vmax;
 }
 
-.enterFS,
-.exitFS {
+#enterFS,
+#exitFS {
   font-size: calc(0.5rem + 1vmax);
   color: rgb(230, 230, 230);
   -webkit-transition: all .3s;
@@ -275,14 +324,14 @@ min-height: 100vh;
   transition: all .3s;
 }
 
-.enterFS:hover,
-.exitFS:hover {
+#enterFS:hover,
+#exitFS:hover {
   font-size: calc(0.5rem + 1.2vmax);
   color: white;
   cursor: pointer;
 }
 
-.exitFS {
+#exitFS {
   display: none;
 }
 
@@ -372,6 +421,7 @@ cursor: default;
 
 #playerCount {
   font-size: 3rem;
+  padding-bottom: .3rem;
   cursor: default;
 }
 
@@ -590,3 +640,4 @@ cursor: default;
 /*
 testing and prototypes
 */
+

@@ -16,7 +16,7 @@ export function cardSizing() {
   	// repeat till they fit
     let longerAxis = Math.max(window.innerHeight, window.innerWidth);
     let shorterAxis = Math.min(window.innerHeight, window.innerWidth);
-	let playAreaSurface = window.innerWidth * window.innerHeight;
+		let playAreaSurface = window.innerWidth * window.innerHeight;
     let cardCount = state.cards.length * 2;
     let cardMaxSize = Math.floor(Math.sqrt(playAreaSurface / cardCount)); // (cards are squares, therefore square root detemines their size)
   	
@@ -35,8 +35,8 @@ export function cardSizing() {
 		  shorterAxisCardCount++;
 		}
 	}
-  	// adjusting for margin and adding 1 extra pixel(it helps!)
-  	cardSize -= (marginAdj + 1);
+  	// adjusting for margin and adding 2 extra pixels(it helps!)
+  	cardSize -= (marginAdj + 2);
   
     styleResize(cardSize);
 	

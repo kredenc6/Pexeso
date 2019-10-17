@@ -1,6 +1,8 @@
 @media (max-width: 1500px) {
   #arrowDown,
-  #arrowUp {
+  #arrowUp,
+  #arrowLeft,
+  #arrowRight {
     opacity: 1;
   }
 }
@@ -9,7 +11,14 @@
   .standartButton {
   	margin: 7vh auto;
     font-size: 1.3rem;
-}
+  }
+
+  #headerMenu button {
+    min-width: 100px;
+    border-radius: 20px;
+    font-size: 4vw;
+    font-weight: 800;
+  }
 
   #h2Settings {
     margin-top: 6vh;
@@ -18,7 +27,6 @@
 
   #fileBttHolder {
     margin: 5vh 0;
-    
   }
 
   .fileButtons {

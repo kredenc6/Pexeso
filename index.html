@@ -62,25 +62,45 @@
         <symbol id="icon-contract" viewbox="0 0 100 100">
             <path d="m2.5 78.5h18.999v19h12.668v-31.667h-31.667zm18.999-57h-18.999v12.667h31.667v-31.667h-12.668zm44.335 76h12.667v-19h19v-12.667h-31.667zm12.667-76v-19h-12.667v31.667h31.667v-12.667z"/>
         </symbol>
+
+        <symbol id="icon-arrow-left" viewbox="0 0 100 100">
+            <path d="m97.5 2.5-95 47.5 95 47.5z" />
+        </symbol>
+
+        <symbol id="icon-arrow-right" viewbox="0 0 100 100">
+            <path d="m2.5 2.5 95 47.5-95 47.5z"/>
+        </symbol>
     </svg>
     <!--   HEADER -->
     <header id="header">
         <div id="scoreLine"></div>
+        <div id="headerMenu">
+            <button class="standartButton gameoverBtt">Restart</button>
+            <button class="standartButton mainMenuBtt">Main menu</button>
+            <div id="headerFSIconHolder">
+                <svg id="enterFS">
+                    <use xlink:href="#icon-expand"></use>
+                </svg>
+                <svg id="exitFS">
+                    <use xlink:href="#icon-contract"></use>
+                </svg>
+            </div>
+        </div>
         <div id="arrowContainer">
             <svg id="arrowDown">
                 <use xlink:href="#icon-arrow-down"></use>
             </svg>
-            <svg id="arrowUp">
-                <use xlink:href="#icon-arrow-up"></use>
-            </svg>
-        </div>
-        <div id="headerFSIconHolder">
-            <svg class="enterFS">
-                <use xlink:href="#icon-expand"></use>
-            </svg>
-            <svg class="exitFS">
-                <use xlink:href="#icon-contract"></use>
-            </svg>
+            <div id="multipleArrows">
+                <svg id="arrowLeft" class="leftRightArrows">
+                    <use xlink:href="#icon-arrow-left"></use>
+                </svg>
+                <svg id="arrowUp">
+                    <use xlink:href="#icon-arrow-up"></use>
+                </svg>
+                <svg id="arrowRight" class="leftRightArrows">
+                    <use xlink:href="#icon-arrow-right"></use>
+                </svg>
+            </div>
         </div>
     </header>
     <!--   GAME -->
@@ -88,21 +108,13 @@
     <div id="finnishHolder">
         <span id="finnishMessage">FINNISH MESSAGE PLACEHOLDER</span>
         <div id="bttHolder">
-            <button id="gameoverBtt" class="standartButton">Let's go again!</button>
-            <button id="mainMenuBtt" class="standartButton">Main menu</button>
+            <button class="standartButton gameoverBtt">Let's go again!</button>
+            <button class="standartButton mainMenuBtt">Main menu</button>
         </div>
     </div>
 
     <!--    SETTINGS -->
     <div id="settingsHolder">
-        <div id="settingsFSIconHolder">
-            <svg class="enterFS">
-                <use xlink:href="#icon-expand"></use>
-            </svg>
-            <svg class="exitFS">
-                <use xlink:href="#icon-contract"></use>
-            </svg>
-        </div>
         <h2 id="h2Settings">PEXESO</h2>
         <div id="fileBttHolder">
             <label class="fileButtons" for="pictureFiles">

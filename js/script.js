@@ -43,7 +43,7 @@ import {getHeaderHeight, hexToRGB} from "./miscellaneous.js";
 import {filesIn, styleFileCounter} from "./fileSetup.js";
 import {changeName, isValidName} from "./nameChanger.js";
 import {cardSizing, adjustDOMtoNextPlayer} from "./cardStyler.js";
-import {styleHeader} from "./headerStyler.js";
+import {styleHeader, styleHeaderArrows} from "./headerStyler.js";
 import {showCard, hideCard} from "./cardFlipper.js";
 
 class Player {
@@ -93,8 +93,12 @@ addPlayer(true);
 
 //SETTINGS, EVENT LISTENERS
 startButton.addEventListener("click", start);
-document.getElementById("gameoverBtt").addEventListener("click", start);
-document.getElementById("mainMenuBtt").addEventListener("click", backToSettings);
+for(let button of document.getElementsByClassName("gameoverBtt")) {
+    button.addEventListener("click", start);
+}
+for(let button of document.getElementsByClassName("mainMenuBtt")) {
+    button.addEventListener("click", backToSettings);
+}
 document.getElementById("addPlayerButt").addEventListener("click", () => addPlayer());
 document.getElementById("removePlayerButt").addEventListener("click", removePlayer);
 
@@ -117,7 +121,8 @@ export function start() {
     createDOM();
     createScore();
     cardSizing();
-	styleHeader();
+    styleHeader();
+    styleHeaderArrows();
     nextPlayer();
     window.addEventListener("resize", cardSizing);
     window.addEventListener("resize", styleHeader);
@@ -461,6 +466,16 @@ function createScore() {
             document.getElementById("arrowUp").style.display = "none";
             document.getElementById("header").style.top = `-${getHeaderHeight()}px`;
         });
+
+        document.getElementById("arrowLeft").addEventListener("click", () => {
+            document.getElementById("scoreLine").style.display = "none";
+            document.getElementById("headerMenu").style.display = "flex";
+        });
+
+        document.getElementById("arrowRight").addEventListener("click", () => {
+            document.getElementById("scoreLine").style.display = "flex";
+            document.getElementById("headerMenu").style.display = "none";
+        });
     }
 }
 
@@ -521,44 +536,43 @@ function backToSettings() {
 
 
 function setupFullscreen() {
-    for(let enterIcon of document.getElementsByClassName("enterFS")) {
-        enterIcon.addEventListener("click",enterFS);
+    document.getElementById("startButt").addEventListener("click", enterFS);
+    document.getElementById("enterFS").addEventListener("click",enterFS);
+    document.getElementById("exitFS").addEventListener("click",exitFS);
+    for(let button of document.getElementsByClassName("mainMenuBtt")) {
+        button.addEventListener("click", exitFS);
     }
-    for(let exitIcon of document.getElementsByClassName("exitFS")) {
-        exitIcon.addEventListener("click",exitFS);
-    }
-}
 
-function enterFS() {
-    document.querySelector("body").requestFullscreen({navigationUI: "hide"})
-    // document.querySelector("body").requestFullscreen()
-    .catch(err => console.log(err));
-}
-
-function exitFS() {
-    if(!document.fullscreenElement) return;
-    document.exitFullscreen()
-    .catch(err => console.log(err));
-}
-
-document.addEventListener("fullscreenchange", () => {
-    if(state.fullscreen) {
-        for(let enterIcon of document.getElementsByClassName("enterFS")) {
+    document.addEventListener("fullscreenchange", () => {
+        const enterIcon = document.getElementById("enterFS");
+        const exitIcon = document.getElementById("exitFS");
+        if(state.fullscreen) {
             enterIcon.style.display = "inline";
-        }
-        for(let exitIcon of document.getElementsByClassName("exitFS")) {
             exitIcon.style.display = "none";
         }
-    }
-    else {
-        for(let enterIcon of document.getElementsByClassName("enterFS")) {
+        else {
             enterIcon.style.display = "none";
-        }
-        for(let exitIcon of document.getElementsByClassName("exitFS")) {
             exitIcon.style.display = "inline";
         }
+        state.fullscreen = !state.fullscreen;
+    });
+
+    function enterFS() {
+        document.querySelector("body").requestFullscreen({navigationUI: "hide"})
+        .catch(err => {
+            // try fullscreen without "navigationUI" before disregard
+            console.log(err);
+            document.querySelector("body").requestFullscreen()
+            .catch(err => console.log(err));
+        });
     }
-    state.fullscreen = !state.fullscreen;
-});
+    
+    function exitFS() {
+        if(!document.fullscreenElement) return;
+        document.exitFullscreen()
+        .catch(err => console.log(err));
+    }
+}
 
 setupFullscreen();
+
