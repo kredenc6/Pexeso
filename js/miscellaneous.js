@@ -19,12 +19,21 @@ export function transferToHex(colorStr) {
     return hexColor;
 }
 
-// let "max-height" css property override "height" when needed
+// let "max-height" and "min-height" css property override "height" when needed
 export function getHeaderHeight() {
     let headerNode = document.getElementById("header");
     let headerStyle = headerNode.currentStyle || window.getComputedStyle(headerNode);
-    let headerMaxHeight = headerStyle["max-height"];
-    let headerHeight = Math.min(/\d+/.exec(headerNode.style.height), /\d+/.exec(headerMaxHeight));
+    
+    let headerMaxHeight = Number(/\d+/.exec(headerStyle["max-height"])[0]);
+    let headerMinHeight = Number(/\d+/.exec(headerStyle["min-height"])[0]);
+    let headerHeight = Number(/\d+/.exec(headerNode.style.height)[0]);
+
+    if(headerHeight > headerMaxHeight) {
+        return headerMaxHeight;
+    } else
+    if(headerHeight < headerMinHeight) {
+        return headerMinHeight;
+    }
     return headerHeight;
 }
 

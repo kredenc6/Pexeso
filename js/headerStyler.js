@@ -1,6 +1,6 @@
 import {getHeaderHeight} from "./miscellaneous.js";
 
-styleHeaderArrows();
+// styleHeaderArrows();
 
 export function styleHeader() {
 	let windowWidth = window.innerWidth;
@@ -31,10 +31,10 @@ export function styleHeaderArrows() {
 			// wait for it to display, then change style
 			setTimeout(() => {
 				if(arrow.id === "arrowLeft") {
-					arrow.style.marginRight = "4vw";
+					arrow.style.marginRight = "4vmax";
 				}
 				else {
-					arrow.style.marginLeft = "4vw";
+					arrow.style.marginLeft = "4vmax";
 				}
 			},0);
 		}

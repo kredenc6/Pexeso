@@ -115,8 +115,10 @@ export function start() {
     document.querySelector("body").style.backgroundColor = "#fff";
     document.querySelector("html").style.backgroundColor = "#fff";
     
-  	resetPlayers();
+    //for reseting background when restarting
+    hideCard();
     
+    resetPlayers();
     createCards();
     createDOM();
     createScore();
@@ -470,12 +472,26 @@ function createScore() {
         document.getElementById("arrowLeft").addEventListener("click", () => {
             document.getElementById("scoreLine").style.display = "none";
             document.getElementById("headerMenu").style.display = "flex";
+            const activeDotNode = getActiveDot();
+            if(activeDotNode.previousElementSibling) {
+                activeDotNode.classList.toggle("dotActive");
+                activeDotNode.previousElementSibling.classList.toggle("dotActive");
+            }
         });
-
+        
         document.getElementById("arrowRight").addEventListener("click", () => {
             document.getElementById("scoreLine").style.display = "flex";
             document.getElementById("headerMenu").style.display = "none";
+            const activeDotNode = getActiveDot();
+            if(activeDotNode.nextElementSibling) {
+                activeDotNode.classList.toggle("dotActive");
+                activeDotNode.nextElementSibling.classList.toggle("dotActive");
+            }
         });
+
+        function getActiveDot() {
+            return document.getElementsByClassName("dotActive")[0];
+        }
     }
 }
 
