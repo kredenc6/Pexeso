@@ -1,11 +1,12 @@
 import {state} from "./script.js";
 
 export function showCard(card) {
-	removeVideo();
-	whiteBackground();
 	let playAreaNode = document.getElementById(`playarea`);
 	let {src, fileType} = card.dataset;
 	let {flipbackTime} = state;
+
+	removeVideoAndAudio();
+	whiteBackground();
 	
 	if(fileType == `picture`) {
 		playAreaNode.style.backgroundPosition = `center`;
@@ -22,6 +23,8 @@ export function showCard(card) {
 	} else if (fileType == `audio`) {
 		let audioNode = document.createElement(`audio`);
 		audioNode.src = src;
+		audioNode.style.display = "none";
+		playAreaNode.appendChild(audioNode);
 		playNode(audioNode);
 	} else {
 		throw new Error(`Received unknow fileType.`);
@@ -39,7 +42,12 @@ export function showCard(card) {
 	
 	function playNode(node) {
 		node.currentTime = 0;
-        node.play();
+				node.play()
+				.catch(err => {
+					if(!err.name === "AbortError") { // no need to deal with pausing/deleting(the node) error 
+						console.log(err.message);
+					}
+				}); 
 		if(flipbackTime !== 0) {
 			setTimeout(() => node.pause(), flipbackTime);
 		}
@@ -47,8 +55,8 @@ export function showCard(card) {
 }
 
 export function hideCard() {
+	removeVideoAndAudio();
 	whiteBackground();
-	removeVideo();
 	dimCards();
 	
 	function dimCards() {
@@ -60,10 +68,19 @@ export function hideCard() {
 	}
 }
 
-function removeVideo() {
-	let playAreaNode = document.getElementById(`playarea`);
-	if(playAreaNode.querySelector(`video`)) {
+function removeVideoAndAudio() {
+	const playAreaNode = document.getElementById(`playarea`);
+	const videoNode = document.querySelector("video");
+	const audioNode = document.querySelector("audio");
+	if(videoNode) {
+		// videoNode.pause();
+		videoNode.currentTime = 0;
 		playAreaNode.removeChild(playAreaNode.querySelector(`#videoContainer`));
+	}
+	if(audioNode) {
+		// audioNode.pause();
+		audioNode.currentTime = 0;
+		playAreaNode.removeChild(playAreaNode.querySelector(`audio`));
 	}
 }
 

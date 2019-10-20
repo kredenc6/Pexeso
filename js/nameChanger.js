@@ -85,17 +85,24 @@ function nameChanged() {
     }
 	
 	function deactivateStartButt() {
-	let startButtonNode = document.getElementById("startButt");
-	startButtonNode.removeEventListener("click", start);
-	startButtonNode.classList.add("inactiveStartButt");
-	startButtonNode.innerText = "Invalid name.";
-	}
-
+        const startButtonNode = document.getElementById("startButt");
+        startButtonNode.removeEventListener("click", start);
+        startButtonNode.classList.add("inactiveStartButt");
+        startButtonNode.classList.remove("activeButt");
+        startButtonNode.innerText = "Invalid name.";
+    }
+    
 	function activateStartButt() {
-		let startButtonNode = document.getElementById("startButt");
-		startButtonNode.addEventListener("click", start);
-		startButtonNode.classList.remove("inactiveStartButt");
-		startButtonNode.innerText = "Let's start!";
+        const startButtonNode = document.getElementById("startButt");
+        startButtonNode.classList.remove("inactiveStartButt");
+        if(state.files.fileNames.length > 0) {
+            startButtonNode.addEventListener("click", start);
+            startButtonNode.classList.add("activeButt");
+            startButtonNode.innerText = "Let's start!";
+        }
+        else {
+            startButtonNode.innerText = "Select files to start.";
+        }
 	}
 	
 	function styleMessage(text) {

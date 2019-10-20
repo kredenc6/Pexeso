@@ -1,5 +1,5 @@
-import {state} from "./script.js";
-let startButton = document.getElementById("startButt");
+import {state, start} from "./script.js";
+const startButtonNode = document.getElementById("startButt");
 
 
 //  creating URLs for pictures/sounds/videos + some styling
@@ -43,12 +43,26 @@ export function filesIn() {
         button.style.color = "green";
         button.style.border = "1px solid green";
     }
-	styleFileCounter(fileCount, maxFiles);
-    startButton.style.display = "block";
+    styleFileCounter(fileCount, maxFiles);
+    styleStartButton(fileCount);
+    startButtonNode.addEventListener("click", start);
 }
 
 export function styleFileCounter(fileCount, maxFiles) {
 	let percent = Math.round(fileCount / maxFiles * 100);
 	document.getElementById("countBar").style.width = `${percent}%`;
 	document.getElementById("fileCount").innerText = `${fileCount} / ${maxFiles}`;
+}
+
+export function styleStartButton(fileCount) {
+    if(fileCount) {
+        startButtonNode.classList.add("activeButt");
+        startButtonNode.classList.remove("inactiveStartButt");
+        startButtonNode.innerText = "Let's start!";
+    }
+    else {
+        startButtonNode.classList.add("inactiveStartButt");
+        startButtonNode.classList.remove("activeButt");
+        startButtonNode.innerText = "Select files to start.";
+    }
 }

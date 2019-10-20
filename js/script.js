@@ -30,7 +30,6 @@ export const state = {
     fullscreen: false
 };
 
-let startButton = document.getElementById("startButt");
 let playarea = document.getElementById("playarea");
 
 let gameData = {
@@ -40,11 +39,12 @@ let gameData = {
 
 import {createCSelector, removeCSelector, redrawCSelector, isInactiveColor, getInactiveColor} from "./colorSelector.js";
 import {getHeaderHeight, hexToRGB} from "./miscellaneous.js";
-import {filesIn, styleFileCounter} from "./fileSetup.js";
+import {filesIn, styleFileCounter, styleStartButton} from "./fileSetup.js";
 import {changeName, isValidName} from "./nameChanger.js";
 import {cardSizing, adjustDOMtoNextPlayer} from "./cardStyler.js";
 import {styleHeader, styleHeaderArrows} from "./headerStyler.js";
 import {showCard, hideCard} from "./cardFlipper.js";
+import {setupFullscreen, enterFS} from "./fullscreen.js";
 
 class Player {
     constructor(position, name) {
@@ -90,9 +90,10 @@ class Player {
 setUpGameSettings();
 createPlayers();
 addPlayer(true);
+setupFullscreen();
+
 
 //SETTINGS, EVENT LISTENERS
-startButton.addEventListener("click", start);
 for(let button of document.getElementsByClassName("gameoverBtt")) {
     button.addEventListener("click", start);
 }
@@ -126,6 +127,7 @@ export function start() {
     styleHeader();
     styleHeaderArrows();
     nextPlayer();
+    enterFS();
     window.addEventListener("resize", cardSizing);
     window.addEventListener("resize", styleHeader);
 }
@@ -257,8 +259,6 @@ function removePlayer() {
 }
 
 function setUpGameSettings() {
-    startButton.style.display = "none";
-    
     for(let button of document.getElementsByClassName("fileButtons")) {
         button.addEventListener("mouseover",biggerFileButton);
         button.addEventListener("mouseout",smallerFileButton);
@@ -516,7 +516,6 @@ function backToSettings() {
     document.getElementById("settingsHolder").style.display = "block";
     document.getElementById("finnishHolder").style.display = "none";
     document.getElementById("header").style.display = "none";
-    document.getElementById("startButt").style.display = "none";
     document.querySelector("body").style.backgroundColor = "#2b2b2b";
     document.querySelector("html").style.backgroundColor = "#2b2b2b";
     
@@ -543,52 +542,12 @@ function backToSettings() {
         // RESET INPUT FILES
         button.querySelector("input").value = "";
     }
+    styleStartButton(0);
+    document.getElementById("startButt").classList.remove("inactiveStartButt");
+    document.getElementById("startButt").removeEventListener("click", start);
 
     styleFileCounter(0, state.files.maxFiles);
     
     window.removeEventListener("resize", cardSizing);
     window.removeEventListener("resize", styleHeader);
 }
-
-
-function setupFullscreen() {
-    document.getElementById("startButt").addEventListener("click", enterFS);
-    document.getElementById("enterFS").addEventListener("click",enterFS);
-    document.getElementById("exitFS").addEventListener("click",exitFS);
-    for(let button of document.getElementsByClassName("mainMenuBtt")) {
-        button.addEventListener("click", exitFS);
-    }
-
-    document.addEventListener("fullscreenchange", () => {
-        const enterIcon = document.getElementById("enterFS");
-        const exitIcon = document.getElementById("exitFS");
-        if(state.fullscreen) {
-            enterIcon.style.display = "inline";
-            exitIcon.style.display = "none";
-        }
-        else {
-            enterIcon.style.display = "none";
-            exitIcon.style.display = "inline";
-        }
-        state.fullscreen = !state.fullscreen;
-    });
-
-    function enterFS() {
-        document.querySelector("body").requestFullscreen({navigationUI: "hide"})
-        .catch(err => {
-            // try fullscreen without "navigationUI" before disregard
-            console.log(err);
-            document.querySelector("body").requestFullscreen()
-            .catch(err => console.log(err));
-        });
-    }
-    
-    function exitFS() {
-        if(!document.fullscreenElement) return;
-        document.exitFullscreen()
-        .catch(err => console.log(err));
-    }
-}
-
-setupFullscreen();
-
