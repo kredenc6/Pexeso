@@ -320,7 +320,8 @@ transition: all 1s;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
   /* this fixes firefox bug with backface-visibility */
-  transform: rotateX(0deg);
+  -webkit-transform: rotateX(0deg);
+          transform: rotateX(0deg);
         }
 
 .front {
@@ -641,6 +642,7 @@ input[type="file"] {
   -webkit-transition: all .3s;
   -o-transition: all .3s;
   transition: all .3s;
+  /* font-size is calculated by fileButtonsFontSizing() in miscellaneos.js */
 }
 
 .fileButtons:hover {

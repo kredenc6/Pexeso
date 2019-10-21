@@ -38,7 +38,7 @@ let gameData = {
 };
 
 import {createCSelector, removeCSelector, redrawCSelector, isInactiveColor, getInactiveColor} from "./colorSelector.js";
-import {getHeaderHeight, hexToRGB, detectEdgeBrowser} from "./miscellaneous.js";
+import {getHeaderHeight, hexToRGB, detectEdgeBrowser, fileButtonsFontSizing} from "./miscellaneous.js";
 import {filesIn, styleFileCounter, styleStartButton} from "./fileSetup.js";
 import {changeName, isValidName} from "./nameChanger.js";
 import {cardSizing, adjustDOMtoNextPlayer} from "./cardStyler.js";
@@ -89,12 +89,15 @@ class Player {
 //STARTING FUNCTIONS
 detectEdgeBrowser();
 setUpGameSettings();
+fileButtonsFontSizing();
 createPlayers();
 addPlayer(true);
 setupFullscreen();
 
 
 //SETTINGS, EVENT LISTENERS
+window.addEventListener("resize", fileButtonsFontSizing);
+
 for(let button of document.getElementsByClassName("gameoverBtt")) {
     button.addEventListener("click", start);
 }
@@ -551,3 +554,9 @@ function smallerFileButton() {
 
 
 // ***** WORK IN PROGRESS *****
+
+
+
+
+
+

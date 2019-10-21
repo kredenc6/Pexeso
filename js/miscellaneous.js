@@ -65,3 +65,18 @@ export function detectEdgeBrowser() {
         edgeWarningNode.style.display = "none";
     }
 }
+
+export function fileButtonsFontSizing() {
+    const bttDescNodes = document.getElementsByClassName("bttDesc");
+    const bttSize =
+        /\d+/.exec(
+            window.getComputedStyle(
+                document.getElementsByClassName("fileButtons")[0]
+            )
+            .width
+        )[0];
+
+    for(let node of bttDescNodes) {
+        node.style.fontSize = `${bttSize / 9}px`;
+    }
+}
