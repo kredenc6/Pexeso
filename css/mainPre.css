@@ -121,6 +121,7 @@ button:hover,
 }
 
 #headerMenu button {
+  min-width: 120px;
   margin: 0 1vw;
   border: 1px solid rgba(233, 154, 51, 0.5);
   padding: 0.8vw 0;
@@ -155,6 +156,38 @@ button:hover,
 
 .dotActive {
   background-color: #fff;
+}
+
+#headerFSIconHolder {
+  position: absolute;
+  right: 1vmax;
+  top: 1vmax;
+}
+
+#settingsFSIconHolder {
+  position: fixed;
+  right: 1vmax;
+  top: 1vmax;
+}
+
+#enterFS,
+#exitFS {
+  font-size: calc(0.5rem + 1vmax);
+  color: rgb(230, 230, 230);
+  -webkit-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+}
+
+#enterFS:hover,
+#exitFS:hover {
+  font-size: calc(0.5rem + 1.2vmax);
+  color: white;
+  cursor: pointer;
+}
+
+#exitFS {
+  display: none;
 }
 
 /* ******** arrows ******* */
@@ -257,9 +290,11 @@ transition: all 1s;
 
 .box {
   z-index: 1;
+  /* width and heigth are calculated by javascript in cardStyler.js */
   width: auto;
   height: auto;
   margin: 5px;
+  /* font-size is calculated by javascript in cardStyler.js */
   font-size: 1.2rem;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
@@ -271,6 +306,8 @@ transition: all 1s;
 .front,
 .back {
   position: absolute;
+  width: 100%;
+  height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -280,10 +317,10 @@ transition: all 1s;
   -webkit-box-align: center;
   -ms-flex-align: center;
           align-items: center;
-          width: 100%;
-  height: 100%;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
+  /* this fixes firefox bug with backface-visibility */
+  transform: rotateX(0deg);
         }
 
 .front {
@@ -297,7 +334,7 @@ transition: all 1s;
 .back {
   background-size: contain;
   background-position: center;
-  background-color: rgba( 0, 0, 0, 0 );
+  background-color: rgba( 0, 0, 0, 0.0 );
 border: 1px solid rgba( 0, 0, 0, 0.1 );
   -webkit-transform: rotateY(180deg);
           transform: rotateY(180deg);
@@ -350,38 +387,6 @@ min-height: 100vh;
   background-color: #2b2b2b;
 }
 
-#headerFSIconHolder {
-  position: absolute;
-  right: 1vmax;
-  top: 1vmax;
-}
-
-#settingsFSIconHolder {
-  position: fixed;
-  right: 1vmax;
-  top: 1vmax;
-}
-
-#enterFS,
-#exitFS {
-  font-size: calc(0.5rem + 1vmax);
-  color: rgb(230, 230, 230);
-  -webkit-transition: all .3s;
-  -o-transition: all .3s;
-  transition: all .3s;
-}
-
-#enterFS:hover,
-#exitFS:hover {
-  font-size: calc(0.5rem + 1.2vmax);
-  color: white;
-  cursor: pointer;
-}
-
-#exitFS {
-  display: none;
-}
-
 #settings {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -402,6 +407,10 @@ min-height: 100vh;
   font-size: 3rem;
   text-align: center;
   background-color: inherit;
+}
+
+#edgeWarning {
+  text-align: center;
 }
 
 #icon-sett {
@@ -620,7 +629,7 @@ input[type="file"] {
 
 .fileButtons {
   width: 25vw;
-  height: auto;
+  height: 25vw;
   max-width: 150px;
   max-height: 150px;
   margin: 2rem auto 0 auto;

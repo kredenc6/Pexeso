@@ -51,3 +51,17 @@ export function hexToRGB(hex, alpha) {
         return `rgba( ${r}, ${g}, ${b}, 1 )`;
     }
 }
+
+
+export function detectEdgeBrowser() {
+    const userAgentArr = window.navigator.userAgent.split(" ");
+    const edgeWarningNode = document.getElementById("edgeWarning");
+
+    edgeWarningNode.addEventListener("click", () => {
+        event.target.style.display = "none";
+    })
+
+    if(!userAgentArr[userAgentArr.length - 1].includes("Edge")) {
+        edgeWarningNode.style.display = "none";
+    }
+}

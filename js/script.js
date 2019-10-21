@@ -38,7 +38,7 @@ let gameData = {
 };
 
 import {createCSelector, removeCSelector, redrawCSelector, isInactiveColor, getInactiveColor} from "./colorSelector.js";
-import {getHeaderHeight, hexToRGB} from "./miscellaneous.js";
+import {getHeaderHeight, hexToRGB, detectEdgeBrowser} from "./miscellaneous.js";
 import {filesIn, styleFileCounter, styleStartButton} from "./fileSetup.js";
 import {changeName, isValidName} from "./nameChanger.js";
 import {cardSizing, adjustDOMtoNextPlayer} from "./cardStyler.js";
@@ -87,6 +87,7 @@ class Player {
 }
 
 //STARTING FUNCTIONS
+detectEdgeBrowser();
 setUpGameSettings();
 createPlayers();
 addPlayer(true);
@@ -436,6 +437,47 @@ function resetPlayers() {
     state.status.ready = true;
 }
 
+function backToSettings() {
+    playarea.style.display = "none";
+    playarea.style.innerHTML = "";
+    document.getElementById("settingsHolder").style.display = "block";
+    document.getElementById("finnishHolder").style.display = "none";
+    document.getElementById("header").style.display = "none";
+    document.querySelector("body").style.backgroundColor = "#2b2b2b";
+    document.querySelector("html").style.backgroundColor = "#2b2b2b";
+    
+    // RESET GAME STATE
+    state.cards = [];
+    state.deck = [];
+    state.files = {
+        maxFiles: 20,
+        audioURLs: [],
+        videoURLs: [],
+        pictureURLs: [],
+        fileNames: []
+    };
+    state.status = {
+        ...state.status,
+        pairCount: 0
+    };
+    
+    // STYLE BUTTONS AND RESET INPUTS
+    for(let button of document.getElementsByClassName("fileButtons")) {
+        button.style.color = "red";
+        button.style.border = "1px solid red";
+        button.querySelector("span").innerText = `Click to select ${button.querySelector("span").id.slice(0, -7)}.`;
+        // RESET INPUT FILES
+        button.querySelector("input").value = "";
+    }
+    styleStartButton(0);
+    document.getElementById("startButt").classList.remove("inactiveStartButt");
+    document.getElementById("startButt").removeEventListener("click", start);
+
+    styleFileCounter(0, state.files.maxFiles);
+    
+    window.removeEventListener("resize", cardSizing);
+    window.removeEventListener("resize", styleHeader);
+}
 
 // ***** GAME STYLING *****
 
@@ -498,56 +540,14 @@ function createScore() {
 // ***** EVENT LISTENER FUNCTIONS *****
 
 function biggerFileButton() {
-	this.querySelector(".fileIconHolders").style.width = "48%";
-	this.querySelector(".fileIconHolders").style.height = "48%";
+	event.currentTarget.querySelector(".fileIconHolders").style.width = "48%";
+	event.currentTarget.querySelector(".fileIconHolders").style.height = "48%";
 }
 
 function smallerFileButton() {
-	this.querySelector(".fileIconHolders").style.width = "40%";
-	this.querySelector(".fileIconHolders").style.height = "40%";
+	event.currentTarget.querySelector(".fileIconHolders").style.width = "40%";
+	event.currentTarget.querySelector(".fileIconHolders").style.height = "40%";
 }
 
 
 // ***** WORK IN PROGRESS *****
-
-function backToSettings() {
-    playarea.style.display = "none";
-    playarea.style.innerHTML = "";
-    document.getElementById("settingsHolder").style.display = "block";
-    document.getElementById("finnishHolder").style.display = "none";
-    document.getElementById("header").style.display = "none";
-    document.querySelector("body").style.backgroundColor = "#2b2b2b";
-    document.querySelector("html").style.backgroundColor = "#2b2b2b";
-    
-    // RESET GAME STATE
-    state.cards = [];
-    state.deck = [];
-    state.files = {
-        maxFiles: 20,
-        audioURLs: [],
-        videoURLs: [],
-        pictureURLs: [],
-        fileNames: []
-    };
-    state.status = {
-        ...state.status,
-        pairCount: 0
-    };
-    
-    // STYLE BUTTONS AND RESET INPUTS
-    for(let button of document.getElementsByClassName("fileButtons")) {
-        button.style.color = "red";
-        button.style.border = "1px solid red";
-        button.querySelector("span").innerText = `Click to select ${button.querySelector("span").id.slice(0, -7)}.`;
-        // RESET INPUT FILES
-        button.querySelector("input").value = "";
-    }
-    styleStartButton(0);
-    document.getElementById("startButt").classList.remove("inactiveStartButt");
-    document.getElementById("startButt").removeEventListener("click", start);
-
-    styleFileCounter(0, state.files.maxFiles);
-    
-    window.removeEventListener("resize", cardSizing);
-    window.removeEventListener("resize", styleHeader);
-}

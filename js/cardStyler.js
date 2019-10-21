@@ -3,22 +3,22 @@ import {state} from "./script.js";
 
 export function cardSizing() {
     // getting margin value from style
-    let boxClass = document.querySelector(".box");
-    let style = boxClass.currentStyle || window.getComputedStyle(boxClass); // info source at the top of HTML file
-    let marginAdj = Number(style.margin.slice(0, -2)) * 2; // in px will it work only in Chrome?
+    const boxClass = document.querySelector(".box");
+    const style = boxClass.currentStyle || window.getComputedStyle(boxClass); // info source at the top of HTML file
+    const marginAdj = Number(style.margin.slice(0, -2)) * 2; // in px will it work only in Chrome?
     if (!style.margin.endsWith("px")) {
-        console.error("Not getting margin value in px!! cardSizing()");
+        console.error("Not getting margin value in px!! cardStyler.js");
     }
 
   	// calculate card max size from the current window surface and card count (idealy cards cover whole surface)
   	// if they cover more - recalculate(reduce) their size to fit 1 extra card to row or column(whichever return bigger card size value)...
   	// ...basically meaning adding an extra row or column
   	// repeat till they fit
-    let longerAxis = Math.max(window.innerHeight, window.innerWidth);
-    let shorterAxis = Math.min(window.innerHeight, window.innerWidth);
-		let playAreaSurface = window.innerWidth * window.innerHeight;
-    let cardCount = state.cards.length * 2;
-    let cardMaxSize = Math.floor(Math.sqrt(playAreaSurface / cardCount)); // (cards are squares, therefore square root detemines their size)
+    const longerAxis = Math.max(window.innerHeight, window.innerWidth);
+    const shorterAxis = Math.min(window.innerHeight, window.innerWidth);
+		const playAreaSurface = window.innerWidth * window.innerHeight;
+    const cardCount = state.cards.length * 2;
+    const cardMaxSize = Math.floor(Math.sqrt(playAreaSurface / cardCount)); // (cards are squares, therefore square root detemines their size)
   	
   	let longerAxisCardCount = Math.floor(longerAxis / cardMaxSize);
   	let shorterAxisCardCount = Math.floor(shorterAxis / cardMaxSize);
@@ -28,11 +28,11 @@ export function cardSizing() {
 	  	let cardSizeAdjLong = Math.min(longerAxis / (longerAxisCardCount + 1));
 	  	let cardSizeAdjShort = Math.min(shorterAxis / (shorterAxisCardCount + 1));
 	  	if(cardSizeAdjLong > cardSizeAdjShort) {
-		  cardSize = cardSizeAdjLong;
-		  longerAxisCardCount++;
+				cardSize = cardSizeAdjLong;
+				longerAxisCardCount++;
 		} else {
-		  cardSize = cardSizeAdjShort;
-		  shorterAxisCardCount++;
+				cardSize = cardSizeAdjShort;
+				shorterAxisCardCount++;
 		}
 	}
   	// adjusting for margin and adding 2 extra pixels(it helps!)
@@ -55,8 +55,8 @@ export function cardSizing() {
 }
 
 export function adjustDOMtoNextPlayer(player) {
-    let activeColor = player.color;
-    let frontNodes = document.getElementsByClassName("front");
+    const activeColor = player.color;
+    const frontNodes = document.getElementsByClassName("front");
     // redraw now if needed
     if(state.mouseOnCard) {
         state.mouseOnCard.style.boxShadow = "2px 2px 6px " + activeColor + ", -2px -2px 6px " + activeColor;
