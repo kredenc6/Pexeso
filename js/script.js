@@ -472,6 +472,7 @@ function backToSettings() {
         // RESET INPUT FILES
         button.querySelector("input").value = "";
     }
+    fileButtonsFontSizing();
     styleStartButton(0);
     document.getElementById("startButt").classList.remove("inactiveStartButt");
     document.getElementById("startButt").removeEventListener("click", start);
