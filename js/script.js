@@ -38,7 +38,7 @@ let gameData = {
 };
 
 import {createCSelector, removeCSelector, redrawCSelector, isInactiveColor, getInactiveColor} from "./colorSelector.js";
-import {getHeaderHeight, hexToRGB, detectEdgeBrowser, fileButtonsFontSizing} from "./miscellaneous.js";
+import {getHeaderHeight, hexToRGB, fileButtonsFontSizing} from "./miscellaneous.js";
 import {filesIn, styleFileCounter, styleStartButton} from "./fileSetup.js";
 import {changeName, isValidName} from "./nameChanger.js";
 import {cardSizing, adjustDOMtoNextPlayer} from "./cardStyler.js";
@@ -87,7 +87,6 @@ class Player {
 }
 
 //STARTING FUNCTIONS
-detectEdgeBrowser();
 setUpGameSettings();
 fileButtonsFontSizing();
 createPlayers();
@@ -312,7 +311,6 @@ function showFace() {
             state.status.ready = false;
             playarea.addEventListener("mousemove", mouseOnWhatCard);
 			if(flipbackTime === 0) {
-                // window.ondblclick = flipback;
                 window.addEventListener("dblclick", flipback);
                 window.addEventListener("touchmove", flipback);
 			} else {
@@ -459,10 +457,12 @@ function backToSettings() {
         pictureURLs: [],
         fileNames: []
     };
-    state.status = {
-        ...state.status,
-        pairCount: 0
-    };
+    state.status.pairCount = 0;
+    // BUG MS Edge seems to have a problem with this syntax (solution is above)
+    // state.status = {
+    //     ...state.status,
+    //     pairCount: 0
+    // };
     
     // STYLE BUTTONS AND RESET INPUTS
     for(let button of document.getElementsByClassName("fileButtons")) {

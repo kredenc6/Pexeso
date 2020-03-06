@@ -527,6 +527,10 @@ cursor: default;
   border-radius: 20px;
 }
 
+#playerArea legend {
+  width: 100%;
+}
+
 .pColor {
   width: 1.5rem;
   height: 1.5rem;

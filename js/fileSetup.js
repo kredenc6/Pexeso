@@ -8,9 +8,19 @@ export function filesIn() {
   const id = event.target.id;
   //chosenFiles refer! to the files object
   let chosenFiles;
-  if(id.includes(`picture`)) chosenFiles = pictureURLs;
-  else if(id.includes(`sound`)) chosenFiles = audioURLs;
-  else if(id.includes(`video`)) chosenFiles = videoURLs;
+  let allowedFiles; // MS Edge input[accept] workaround (it's not supported)
+  if(id.includes(`picture`)) {
+    chosenFiles = pictureURLs;
+    allowedFiles = "image";
+  }
+  else if(id.includes(`sound`)) {
+    chosenFiles = audioURLs;
+    allowedFiles = "audio";
+  }
+  else if(id.includes(`video`)) {
+    chosenFiles = videoURLs;
+    allowedFiles = "video";
+  }
   window.URL = window.URL || window.webkitURL || window.mozURL;
   let fileCount = pictureURLs.length + audioURLs.length + videoURLs.length;
   
@@ -21,18 +31,20 @@ export function filesIn() {
 		}
 	  	if(fileCount > maxFiles) {console.error(`File count exceedet!`);}
       
-        let file = event.target.files[x];
-        // skip duplicate (by file name) files
-        if(fileNames.includes(file.name)) {
-            console.log(`Skipping duplicate file.`);
-            continue;
-        } else {
-            fileNames.push(file.name);
-          }
-        let urlFile = URL.createObjectURL(file);
-        chosenFiles.push(urlFile);
-        fileCount++;
+      let file = event.target.files[x];
+      if(!file.type.includes(allowedFiles)) { // skip not allowed types
+        console.log(`Skipping file - wrong type.`);
+        continue;
+      } else if(fileNames.includes(file.name)) { // skip duplicate files (by file name)
+        console.log(`Skipping duplicate file.`);
+        continue;
+      }
+      fileNames.push(file.name);
+      let urlFile = URL.createObjectURL(file);
+      chosenFiles.push(urlFile);
+      fileCount++;
     }
+    if(fileCount === 0) return; // prevent bug in MS Edge
     
     // styling add buttons, countBar and start button
     // ("picture" ||"audio" || "video" + "sBttDesc")

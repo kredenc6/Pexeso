@@ -4,11 +4,16 @@ import {state} from "./script.js";
 export function cardSizing() {
     // getting margin value from style
     const boxClass = document.querySelector(".box");
-    const style = boxClass.currentStyle || window.getComputedStyle(boxClass); // info source at the top of HTML file
-    const marginAdj = Number(style.margin.slice(0, -2)) * 2; // in px will it work only in Chrome?
-    if (!style.margin.endsWith("px")) {
-        console.error("Not getting margin value in px!! cardStyler.js");
-    }
+		const style = boxClass.currentStyle || window.getComputedStyle(boxClass); // info source at the top of HTML file
+		const margin = style.margin ||
+			(style.marginTop === style.marginRight && // MS Edge returns margins separatelly
+			style.marginTop === style.marginBottom && 
+			style.marginTop === style.marginLeft) ?
+			style.marginTop : null; 
+		if (margin === null) {
+				console.error("Not getting valid margin value!! cardStyler.js");
+		}
+		const marginAdj = Number(margin.slice(0, -2)) * 2;
 
   	// calculate card max size from the current window surface and card count (idealy cards cover whole surface)
   	// if they cover more - recalculate(reduce) their size to fit 1 extra card to row or column(whichever return bigger card size value)...
